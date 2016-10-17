@@ -45,8 +45,12 @@ int main(int argc, char* argv[])
         count_in += outcome ;
         // Integer vars must be converted (cast) for correct division
         fraction_in = static_cast<double>(count_in)/n;
-        cout << "Location" << outcome << "\t" << x << "\t" << y << "\t"
-            << count_in << "\t" << n << "\t" << 4.0 * fraction_in << endl;
+        
+        if(n % (N / 100) == 0)
+        {
+            cout << "Location" << outcome << "\t" << x << "\t" << y << "\t" <<
+                count_in << "\t" << n << "\t" << 4.0 * fraction_in << endl;
+        }
     }
     return 0;
 }
