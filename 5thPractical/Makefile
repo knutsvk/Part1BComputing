@@ -2,6 +2,8 @@ CXX=g++
 CCFLAGS=-Wall -ansi -pedantic -O3
 LDFLAGS=
 
+all: GivenICs OneYear
+
 GivenICs: GivenICs.o CelestialObject.o
 	$(CXX) $(CFLAGS) GivenICs.o CelestialObject.o -o GivenICs $(LDFLAGS)
 
