@@ -2,8 +2,11 @@ CXX=g++
 CCFLAGS=-Wall -ansi -pedantic -O3
 LDFLAGS=
 
-main: CelestialObject.o
-	$(CXX) $(CFLAGS) main.o CelestialObject.o -o SimulateOrbit $(LDFLAGS)
+GivenICs: GivenICs.o CelestialObject.o
+	$(CXX) $(CFLAGS) GivenICs.o CelestialObject.o -o GivenICs $(LDFLAGS)
+
+OneYear: OneYear.o CelestialObject.o
+	$(CXX) $(CFLAGS) OneYear.o CelestialObject.o -o OneYear $(LDFLAGS)
 
 %.o: %.cc
 	$(CXX) $(CFLAGS) $< -c -o $@
