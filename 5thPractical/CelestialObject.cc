@@ -60,7 +60,7 @@ double kineticEnergy(CelestialObject planet)
 double energy(CelestialObject planet, CelestialObject sun)
 {
     /* Returns the total energy of a planet orbiting a sun */
-    return potentialEnergy(planet) + kineticEnergy(planet, sun);
+    return potentialEnergy(planet, sun) + kineticEnergy(planet);
 }
 
 double angularMomentum(CelestialObject planet)

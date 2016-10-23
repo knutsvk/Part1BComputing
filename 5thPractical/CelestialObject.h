@@ -20,9 +20,9 @@ void initialiseEarth(CelestialObject &earth);
 
 double distance(CelestialObject planet);
 double speed(CelestialObject planet);
-double potentialEnergy(CelestialObject planet);
+double potentialEnergy(CelestialObject planet, CelestialObject sun);
 double kineticEnergy(CelestialObject planet);
-double energy(CelestialObject planet);
+double energy(CelestialObject planet, CelestialObject sun);
 double angularMomentum(CelestialObject planet);
 
 void updateForce(CelestialObject &planet, CelestialObject sun);
@@ -33,4 +33,4 @@ void euler(CelestialObject &planet, CelestialObject sun, double &t, double dt);
 void leapfrog(CelestialObject &planet, CelestialObject sun, double &t, double dt);
 void rk4(CelestialObject &planet, CelestialObject sun, double &t, double dt);
 
-void printp(CelestialObject planet);
+void printp(CelestialObject planet, CelestialObject sun);

@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     while(t < T)
     {
         printf("%d\t", int(t / dt));
-        printp(earth);
+        printp(earth, sun);
 
         leapfrog(earth, sun, t, dt);
     }
