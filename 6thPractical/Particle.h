@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <cstdio>
+#include <cmath>
 
 struct Particle
 {
@@ -12,7 +13,7 @@ struct Particle
 };
 
 void initialiseWall(Particle &p, double pos);
-void initialiseRandom(Particle &p, double xmin, double xmax);
+void initialiseRandom(Particle &p, double pos);
 
 void print(Particle p);
 void printAssembly(Particle *p, int N);

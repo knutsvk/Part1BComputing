@@ -10,27 +10,27 @@ void initialiseWall(Particle &p, double pos)
     p.a = 0.01;
 }
 
-void initialiseRandom(Particle &p, double xmin, double xmax)
+void initialiseRandom(Particle &p, double pos)
 {
-    p.x = xmin + (xmax - xmin) * ranf();
+    p.x = pos;
     p.im = ranf();
     p.v = ranf() - 0.5;
     p.p = p.v / p.im;
     p.T = 0.5 * p.p * p.v;
-    p.a = xmax-p.x < p.x-xmin ? (xmax-p.x) * ranf() : (p.x-xmin) * ranf();
+    p.a = 0.1 + 0.1 * ranf();
 }
 
 void print(Particle p)
 {
-    printf("%8.4g\t%8.4g\t%8.4g\t%8.4g\t%8.4g\t%8.4g\n", 
+    printf("%4.2g\t%4.2g\t%4.2g\t%4.2g\t%4.2g\t%4.2g\n", 
             p.x, p.p, p.im, p.v, p.T, p.a);
 }
 
 void printAssembly(Particle *p, int N)
 {
-    for(int i = 1; i <= N; i++)
+    for(int i = 0; i <= N+1; i++)
     {
-        printf("%.8fg\t", p.x);
+        printf("%8.4g\t", p[i].x);
     }
     printf("\n");
 }
@@ -56,16 +56,18 @@ void collide(Particle &p1, Particle &p2)
     p2.T = 0.5 * p2.v * p2.v / p2.im;
 }
 
-bool touchingEachOther(Particle p1, Particle p2)
+bool touchingEachOther(Particle L, Particle R)
 {
-    // TODO: Implement
-    return false;
+    if(L.x + L.a == R.x - R.a)
+        return true; 
+    else
+        return false;
 }
 
-double collisionTime(Particle p1, Particle p2)
+double collisionTime(Particle L, Particle R)
 {
-    // TODO: Take into consideration radius of particles
-   return (p1.x - p2.x) / (p2.v - p1.v); 
+    double time = (L.x - R.x + L.a + R.a) / (R.v - L.v); 
+    return time <= 0 ? 9000 : time; 
 }
 
 double nextCollision(Particle *p, int N)
