@@ -26,10 +26,10 @@ int main(int argc, char* argv[])
         cin >> N; 
     }
 
-    printf("num\tsqrt\trelerr\n");
+    printf("x\tsqrt(x)\t\trel error\n");
     for(int n = 2; n <= N; n++)
     {
-        printf("%d\t%.5f\t%.2e\n", n, squareRoot(n), 
+        printf("%d\t%.5f\t\t%.2e\n", n, squareRoot(n), 
                 fabs(sqrt(n) - squareRoot(n)) / sqrt(n));
     }
 
