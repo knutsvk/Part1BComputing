@@ -1,26 +1,47 @@
 #include "CelestialObject.h"
 
+void initialise(CelestialObject &co, double mass, double position[DIM], double velocity[DIM])
+{
+    /* Initialise a generalised celestial object */
+    co.mass = mass;
+    for(int i = 0; i < DIM; i++)
+    {
+        co.position[i] = position[i];
+        co.velocity[i] = velocity[i];
+    }
+}
+
 void initialiseSun(CelestialObject &sun)
 {
     /* Initialise a celestial object as the sun, at rest in the origin */
 
-    sun.mass = 1.9891e30;
-    sun.position[0] = 0.0;
-    sun.position[1] = 0.0;
-    sun.velocity[0] = 0.0;
-    sun.velocity[1] = 0.0;
+    double zeros[DIM];
+    for(int i = 0; i < DIM; i++)
+        zeros[i] = 0.0;
+    initialise(sun, 1.9891e30, zeros, zeros);
 }
 
+void initialisePlanet(CelestialObject &planet, 
+                      double mass, double distance, double speed, double angle)
+{
+    /* Initialise a planet, given mass and distance (including degree) from the sun */
+
+    double position[DIM];
+    double velocity[DIM];
+
+    position[0] = distance * cos(angle);
+    position[1] = distance * sin(angle);
+    velocity[0] = speed * cos(angle-0.5*M_PI);
+    velocity[1] = speed * sin(angle-0.5*M_PI);
+
+    initialise(planet, 1.9891e30, position, velocity);
+}
 void initialiseEarth(CelestialObject &earth)
 {
     /* Initialise a celestial object as the Eearth, placed 1 astronomical unit
      * to the right of the origin, travelling with the Earth's mean speed  */
 
-    earth.mass = 5.972e24;
-    earth.position[0] = AU;
-    earth.position[1] = 0.0;
-    earth.velocity[0] = 0.0;
-    earth.velocity[1] = EMS;
+    initialisePlanet(earth, 5.972e24, AU, EMS, 0.0);
 }
 
 double distance(CelestialObject planet)
@@ -46,8 +67,8 @@ double speed(CelestialObject planet)
 double potentialEnergy(CelestialObject planet, CelestialObject sun)
 {
     /* Returns the potential energy of a planet orbiting a sun */
-    // TODO
-    return 0;
+    double A = - G * planet.mass * sun.mass;
+    return A / distance(planet);
 }
 
 double kineticEnergy(CelestialObject planet)
@@ -131,8 +152,8 @@ void printp(CelestialObject planet, CelestialObject sun)
     /* Print state of a given celestial planetect */ 
 
     printf("%12.6g\t%12.6g\t%12.6g\t%12.6g\t%12.6g\t%12.6g\t%12.6g\t%12.6g\n", 
-            planet.position[0], planet.position[1], 
-            planet.velocity[0], planet.velocity[1], 
+            planet.position[0], planet.position[1],
+            planet.velocity[0], planet.velocity[1],
             angularMomentum(planet), potentialEnergy(planet, sun),
             kineticEnergy(planet), energy(planet, sun));
 }

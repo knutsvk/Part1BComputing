@@ -2,13 +2,10 @@ CXX=g++
 CCFLAGS=-Wall -ansi -pedantic -O3
 LDFLAGS=
 
-all: GivenICs OneYear
+all: SolarSystem
 
-GivenICs: GivenICs.o CelestialObject.o
-	$(CXX) $(CFLAGS) GivenICs.o CelestialObject.o -o GivenICs $(LDFLAGS)
-
-OneYear: OneYear.o CelestialObject.o
-	$(CXX) $(CFLAGS) OneYear.o CelestialObject.o -o OneYear $(LDFLAGS)
+SolarSystem: SolarSystem.o CelestialObject.o
+	$(CXX) $(CFLAGS) SolarSystem.o CelestialObject.o -o SolarSystem $(LDFLAGS)
 
 %.o: %.cc
 	$(CXX) $(CFLAGS) $< -c -o $@

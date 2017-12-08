@@ -15,7 +15,10 @@ struct CelestialObject
     double force[DIM];
 };
 
+void initialise(CelestialObject &co, double mass, double position[DIM], double velocity[DIM]);
 void initialiseSun(CelestialObject &sun);
+void initialisePlanet(CelestialObject &planet, 
+                      double mass, double distance, double speed, double angle);
 void initialiseEarth(CelestialObject &earth);
 
 double distance(CelestialObject planet);
